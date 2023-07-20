@@ -8,7 +8,7 @@ def callback(message: String):
 
 
 def subscriber():
-    rospy.init_node("subscriber")
+    rospy.init_node("subscriber_node")
     rospy.Subscriber("subscribe", String, callback=callback)
     rospy.spin()
 

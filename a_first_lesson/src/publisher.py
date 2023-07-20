@@ -6,7 +6,7 @@ from std_msgs.msg import String
 
 def publisher():
     publisher = rospy.Publisher('publisher', String, queue_size=10)
-    rospy.init_node('publisher')
+    rospy.init_node('publisher_node')
     rate = rospy.Rate(1)
 
     i = 0
