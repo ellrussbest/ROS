@@ -18,7 +18,7 @@ def publisher():
         i += 1
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     try:
         publisher()
     except rospy.ROSInterruptException:
