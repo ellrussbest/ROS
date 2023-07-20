@@ -7,3 +7,9 @@
 - Even after the subscriber has been powered off, the publisher will still keep on publishing
 - This is same for the subscribers, which when powered on will do nothing until they get a message from the topic that they are 
 - subscribed to.
+
+## ROS commands
+```
+    roscore
+    roscore -p [port_number]
+```
