@@ -3,10 +3,10 @@
 #include <sstream>
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "publisher");
+    ros::init(argc, argv, "publisher_node");
 
-    ros::NodeHandle n;
-    ros::Publisher publisher = n.advertise<std_msgs::String>("publisher", 1000);
+    ros::NodeHandle node;
+    ros::Publisher publisher = node.advertise<std_msgs::String>("publisher", 1000);
     ros::Rate rate(0.5);
 
     int count = 0;

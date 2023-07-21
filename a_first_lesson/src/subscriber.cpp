@@ -6,7 +6,7 @@ void callback(const std_msgs::String::ConstPtr &msg) {
 }
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "subscriber");
+    ros::init(argc, argv, "subscriber_node");
     ros::NodeHandle node;
 
     ros::Subscriber subscriber = node.subscribe("publisher", 1000, callback);
