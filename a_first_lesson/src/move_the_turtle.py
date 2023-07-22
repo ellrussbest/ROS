@@ -1,11 +1,13 @@
 #! /usr/bin/python3
 
 import rospy
+# from rospy import
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
-import math
 import time
 from std_srvs.srv import Empty
+# Literal allows you to input an array of types, while Optional allows you to input only two
+# explicit values, so the array will only take one value...
 from typing import Literal, Optional
 
 # you can use Literal to act as a type in Python
@@ -13,7 +15,10 @@ Switch = Literal["on", "off"]
 
 
 def switch_lights(_switch: Switch) -> None:
-    print(_switch)
+      if _switch not in ["on", "off"]:
+        raise ValueError("Switch value must be 'on' or 'off'")
+      else:
+        print(_switch)
 
 
 # x: None | int = 0
