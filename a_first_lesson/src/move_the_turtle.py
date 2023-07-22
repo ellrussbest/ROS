@@ -6,7 +6,7 @@ from turtlesim.msg import Pose
 import math
 import time
 from std_srvs.srv import Empty
-from typing import Literal
+from typing import Literal, Optional
 
 # you can use Literal to act as a type in Python
 Switch = Literal["on", "off"]
@@ -16,7 +16,10 @@ def switch_lights(_switch: Switch) -> None:
     print(_switch)
 
 
-x = 0
+# x: None | int = 0
+x: Optional[int] = None
+# x: None | or any another thing
+# x = None
 y = 0
 z = 0
 yaw = 0
@@ -33,7 +36,9 @@ def pose_callback(msg: Pose):
 
 
 def move(speed: int, distance: int):
-    x0 = x
+    x0: Optional[int] = None
+    if (x):
+        x0 = x
     velocity_message = Twist()
     # everytime we will be publishing a constant speed in the publisher
     velocity_message.linear.x = speed
@@ -42,14 +47,14 @@ def move(speed: int, distance: int):
     cmd_vel_topic = '/turtle1/cmd_vel'
     velocity_publisher = rospy.Publisher(cmd_vel_topic, Twist, queue_size=10)
 
-    while True:
+    while not rospy.is_shutdown() and x0 != None:
         rospy.loginfo('Turtlesim moves foward')
         velocity_publisher.publish(velocity_message)
         loop_rate.sleep()
 
         distance_moved = x - x0
         rospy.loginfo('the distance covered is {}'.format(distance_moved))
-        if distance_moved > distance and distance_moved > 0:
+        if distance_moved > distance:
             rospy.loginfo('reached')
             break
 
