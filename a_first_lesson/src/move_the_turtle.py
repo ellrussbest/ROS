@@ -48,7 +48,8 @@ def move(speed: int, distance: int):
         loop_rate.sleep()
 
         distance_moved = x - x0
-        if not (distance_moved < distance):
+        rospy.loginfo('the distance covered is {}'.format(distance_moved))
+        if distance_moved > distance and distance_moved > 0:
             rospy.loginfo('reached')
             break
 
@@ -63,6 +64,9 @@ if __name__ == '__main__':
 
         position_topic = '/turtle1/pose'
         pose_subscriber = rospy.Subscriber(position_topic, Pose, pose_callback)
+        # this is an async process so we need to give our node time to recieve the
+        # response
+        time.sleep(2)
 
         print('move: ')
         move(1.0, 5.0)
