@@ -46,4 +46,17 @@
 
     rospack help
     rospack list
+
+	(
+		Parameters that can be used by nodes at runtime and are normally used for static data,
+		such as configuration parameters
+	)
+	rosparam set	set parameter
+	rosparam get	get parameter
+	rosparam load	load parameters from file
+	rosparam dump	dump parameters to file
+	rosparam delete	delete parameter
+	rosparam list	list parameter names
+
+	export | grep ROS
 ```

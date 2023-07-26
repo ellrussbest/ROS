@@ -135,6 +135,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(publisher src/publisher.cpp)
 add_executable(subscriber src/subscriber.cpp)
+add_executable(parameter src/parameter.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -152,6 +153,10 @@ target_link_libraries(publisher
 )
 
 target_link_libraries(subscriber
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(parameter
   ${catkin_LIBRARIES}
 )
 
