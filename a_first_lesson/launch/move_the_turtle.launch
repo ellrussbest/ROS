@@ -5,57 +5,5 @@
         name="move_the_turtle_node" 
         output="screen"
     >
-        <!--
-            The "param" tag is used to set a parameter value for a node. 
-            The "remap" tag is used to remap the name of a TOPIC or SERVICE. 
-            Here is an example: if you have a node that subscribes to a topic called "/camera/image_raw", 
-            but you want it to subscribe to a topic called "/my_camera/image_raw", 
-            you can use the "remap" tag to change the name of the topic. 
-            The "param" tag can be used to set a parameter value for the node. 
-            For example, if you have a node that needs to know the maximum speed of a robot, 
-            you can set the "max_speed" parameter using the "param" tag.
-
-            <param name="max_speed" type="double" value="10.0" />
-            <remap from="turtlebot_teleop_keyboard/cmd_vel" to="/cmd_vel" />
-
-
-            class MyNode {
-                public:
-                MyNode(double max_speed) : max_speed_(max_speed) {}
-                // ...
-                private:
-                double max_speed_;
-            };
-
-            int main(int argc, char** argv) {
-                ros::init(argc, argv, "my_node");
-                ros::NodeHandle nh("~");
-
-                std::string my_param;
-                nh.getParam("my_param", my_param);
-
-                ROS_INFO("my_param: %s", my_param.c_str());
-
-                return 0;
-            }
-
-            #!/usr/bin/env python
-
-            import argparse
-
-            def main():
-                parser = argparse.ArgumentParser(description='My script')
-                parser.add_argument('my-arg', type=str, help='My argument')
-                args = parser.parse_args()
-
-                if args.my_arg:
-                    print('My argument is:', args.my_arg)
-                else:
-                    print('No argument provided')
-
-            if __name__ == '__main__':
-                main()
-
-        -->
     </node>
 </launch>

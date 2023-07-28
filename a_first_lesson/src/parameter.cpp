@@ -9,8 +9,8 @@ int main(int argc, char **argv) {
 
     ros::NodeHandle node;
 
-    int _max;
-    node.getParam("max", _max);
+    int _max = node.param<int>("/parameter_node/max", 0);
+    // node.getParam("max", _max);
 
     int count = 0;
 

@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find b_second_lesson)/launch/turtlesim.launch">
+        <arg name="name" value="tbsim_1" />
+        <arg name="keyboard_name" value="tbsim_keyboard1" />
+        <arg name="vel_topic" value="tbsim_topic_1" />
+    </include>
+</launch>
