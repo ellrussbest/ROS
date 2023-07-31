@@ -1,0 +1,12 @@
+<launch>
+    <include file="$(find c_third_lesson)/launch/service.launch"/>
+    <node
+        pkg="c_third_lesson"
+        name="service_client_node"
+        type="service_client"
+        output="screen"
+    >
+        <param name="a" type="int32" value="10" />
+        <param name="b" type="int32" value="20" />
+    </node>
+</launch>

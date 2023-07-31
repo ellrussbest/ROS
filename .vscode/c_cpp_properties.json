@@ -8,6 +8,7 @@
       "includePath": [
         "/opt/ros/noetic/include/**",
         "/home/russellbest/catkin_ws/src/a_first_lesson/include/**",
+        "/home/russellbest/catkin_ws/src/c_third_lesson/include/**",
         "/usr/include/**"
       ],
       "name": "ROS",

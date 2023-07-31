@@ -1,8 +1,4 @@
 #include "ros/ros.h"
-#include <iostream>
-#include <string>
-#include "std_msgs/String.h"
-#include <sstream>
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "parameter_node");
