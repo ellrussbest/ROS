@@ -155,6 +155,9 @@ target_link_libraries(service_node
   ${catkin_LIBRARIES}
 )
 
+add_dependencies(service_node c_third_lesson_generate_messages_cpp)
+add_dependencies(service_client c_third_lesson_generate_messages_cpp)
+
 #############
 ## Install ##
 #############
