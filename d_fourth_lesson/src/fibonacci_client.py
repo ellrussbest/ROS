@@ -2,59 +2,35 @@
 
 import rospy
 import actionlib
-from d_fourth_lesson.msg import FibonacciFeedback, FibonacciResult, FibonacciAction, FibonacciGoal
+import sys
+from d_fourth_lesson.msg import FibonacciAction, FibonacciGoal
 
 
-class FibonacciAction(object):
-    # create messages that are used to publish feedback/result
-    _feedback = FibonacciFeedback()
-    _result = FibonacciResult()
+def fibonacci_client():
+    # Creates the SimpleActionClient, passing the type of the action
+    # (FibonacciAction) to the constructor
+    client = actionlib.SimpleActionClient("fibonacci", FibonacciAction)
 
-    def __init__(self, name):
-        self._action_name = name
-        self._action_server = actionlib.SimpleActionServer(
-            self._action_name, FibonacciAction, execute_cb=self.execute_cb, auto_start=False)
-        self._action_server.start()
+    # waits until the action server has started up and started listening for goals
+    client.wait_for_server()
 
-    def execute_cb(self, goal: FibonacciGoal):
-        # helper variables
-        rate = rospy.Rate(1)
-        success = True
+    # creates a goal to send to the action server
+    goal = FibonacciGoal(order=20)
 
-        # append the seeds for the fibonacci sequence
-        self._feedback.sequence = []
-        self._feedback.sequence.append(0)
-        self._feedback.sequence.append(1)
+    # sends the goal to thea ction server
+    client.send_goal(goal)
 
-        # publish info to the console for the user
-        rospy.loginfo("%s: Executing, creating fibonacci sequece of order %i with seeds %i, %i" % (
-            self._action_name, goal.order, self._feedback.sequence[0], self._feedback.sequence[1]))
-        
-        # start executing the action
-        for i in range(1, goal.order):
-            # check that preempt has not been requested by the client
-            if self._action_server.is_preempt_requested():
-                rospy.loginfo("%s: Preempted" % self._action_name)
-                self._action_server.set_preempted()
-                success = False
-                break
-            self._feedback.sequence.append(self._feedback[i] + self._feedback.sequence)
+    # waits for the server to finish performing the action
+    client.wait_for_result()
 
-            # publish the feedback
-            self._action_server.publish_feedback(self._feedback)
+    # prints out the result of executing the action
+    return client.get_result()  # A FibonacciResult
 
-            #this step is not necessary, the sequece is computed at 1Hz for demonstration purposes
-            rate.sleep()
-
-        if success:
-            self._result.sequence = self._feedback.sequence
-            rospy.loginfo("%s: Succeeded"% self._action_name)
-            self._action_server.set_succeeded(self._result)
 
 if __name__ == "__main__":
-    rospy.init_node("fibonacii")
-    server = FibonacciAction(rospy.get_name())
-    rospy.spin()
-    
-
-
+    try:
+        rospy.init_node("fibonacci_client_py")
+        result = fibonacci_client()
+        print("Result:", ', '.join([str(n) for n in result.sequence]))
+    except rospy.ROSInterruptException:
+        print("program interrupted before completion", file=sys.stderr)

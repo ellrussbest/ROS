@@ -74,6 +74,7 @@ generate_messages(
   DEPENDENCIES
   std_msgs  # Or other packages containing msgs
   actionlib_msgs
+  actionlib
 )
 
 ################################################
@@ -108,7 +109,10 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES c_third_lesson
- CATKIN_DEPENDS roscpp rospy actionlib_msgs std_msgs message_runtime
+ CATKIN_DEPENDS roscpp rospy 
+ actionlib_msgs 
+ actionlib
+ std_msgs message_runtime
 #  DEPENDS system_lib
 )
 

@@ -22,7 +22,18 @@ int main(int argc, char **argv)
     action_client.sendGoal(goal);
 
     // wait for the action to return
+    // we could use this line to our advantage to do asynchronous processes
+    // while we still wait for the results from the action see the commented example below
     bool finished_before_timeout = action_client.waitForResult(ros::Duration(30.0));
+
+    /**
+     * @brief Example to show how actions can be asynchronous
+        while(ros::ok() && !ac.waitForResult(ros::Duration(0.5)))
+        {
+            ROS_INFO("Still calculating...");
+            // Perform other tasks here, such as processing sensor data or planning the next action for the robot.
+        }
+     */
 
     if (finished_before_timeout)
     {
