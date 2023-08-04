@@ -59,15 +59,15 @@ public:
 
             // this sleep is not necessary, the sequence is computed at 1 Hz for demonstration purposes
             rate.sleep();
+        }
 
-            if (success)
-            {
-                result.sequence = feedback.sequence;
-                ROS_INFO("%s: Succeeded", action_name.c_str());
+        if (success)
+        {
+            result.sequence = feedback.sequence;
+            ROS_INFO("%s: Succeeded", action_name.c_str());
 
-                // set the action state to succeeded
-                action_server.setSucceeded(result);
-            }
+            // set the action state to succeeded
+            action_server.setSucceeded(result);
         }
     }
 
