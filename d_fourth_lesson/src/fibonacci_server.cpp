@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "fibonacci");
 
-    // FibonacciAction fibonacci("fibonacci");
+    FibonacciAction fibonacci("fibonacci");
 
     ros::spin();
 
