@@ -53,8 +53,6 @@ def move_spiral():
 
         vel_msg.linear.x = linear_velocity
         vel_msg.angular.z = theta
-        print("%s %s %s", a, r, theta)
-
         velocity_publisher.publish(vel_msg)
 
 
