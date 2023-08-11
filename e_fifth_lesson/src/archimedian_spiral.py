@@ -10,50 +10,26 @@
 
 import rospy
 from geometry_msgs.msg import Twist
-from turtlesim.msg import Pose
-import math
 
 
 def move_spiral():
 
+    rospy.init_node('archimedian_spiral', anonymous=True)
+
     # declare variables
-    flag: bool = False
-    x0: float
-    y0: float
-    x: float
-    y: float
-    theta: float
-    sampling_time: float = 0.1
-    linear_velocity: float = 2.0
-
-    # position subscriber callback
-    def callback(message: Pose):
-        nonlocal x, y, theta, flag, x0, y0
-
-        if (not flag):
-            x0 = message.x
-            y0 = message.y
-            flag = True
-        x = message.x
-        y = message.y
-        theta = message.theta
-
-    rospy.init_node('spiral_movement', anonymous=True)
-    rospy.Subscriber("/turtle1/pose", Pose, callback=callback)
+    angular_velocity: float = 2.0
+    vel_msg = Twist()
+    duration = 0.0
+    start_time: float = rospy.get_time()
     velocity_publisher = rospy.Publisher(
         '/turtle1/cmd_vel', Twist, queue_size=10)
-    vel_msg = Twist()
-    rospy.wait_for_message("/turtle1/pose", Pose)
 
     # rate = rospy.Rate(10)  # Loop rate in Hz
     while not rospy.is_shutdown():
-        a = math.sqrt(x0**2 + y0**2)
-        r = math.sqrt((x-x0)**2 + (y-y0)**2)
-        theta = r / (r-a)
+        duration = rospy.get_time() - start_time
 
-        vel_msg.linear.x = linear_velocity
-        vel_msg.angular.z = theta
-        print("%s %s %s", a, r, theta)
+        vel_msg.linear.x = 0.1 * duration
+        vel_msg.angular.z = angular_velocity
 
         velocity_publisher.publish(vel_msg)
 
