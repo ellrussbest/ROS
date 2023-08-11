@@ -15,7 +15,7 @@ import math
 
 def move_spiral():
 
-    rospy.init_node('archimedian_spiral', anonymous=True)
+    rospy.init_node('square_spiral', anonymous=True)
 
     # declare variables
     vel_msg = Twist()
