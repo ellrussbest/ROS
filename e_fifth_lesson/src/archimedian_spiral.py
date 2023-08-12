@@ -20,7 +20,7 @@ def move_spiral():
     angular_velocity: float = 2.0
     vel_msg = Twist()
     duration = 0.0
-    start_time: float = rospy.get_time()
+    start_time: float = rospy.get_time() # constant
     velocity_publisher = rospy.Publisher(
         '/turtle1/cmd_vel', Twist, queue_size=10)
 
